@@ -105,9 +105,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('expense-category')}}" class="nav-link  ">
+                            <a href="{{route('expense-category-list')}}" class="nav-link  ">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Category</p>
+                                <p>Category List</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -13,7 +13,8 @@
                 <h3 class="card-title">{{$page_title}}</h3>
                 <div class="pull-right box-tools">
                     <div class="float-right mt-1">
-                        <a class="btn btn-primary uppercase text-bold" href="{{ route('package.index') }}"> Back</a>
+                        <a class="btn btn-primary uppercase text-bold" href="{{ route('expense-category-list') }}"> Back</a>
+
                     </div>
                 </div>
             </div>
@@ -29,7 +30,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Expense Category<code>*</code></label>
-                                <input type="text" class="form-control" name="expense_cat" value="{{old('')}}" required placeholder="category name">
+                                <input type="text" class="form-control" name="expense_cat" value="{{old('expense_cat')}}" required placeholder="category name">
                             </div>
                         </div>
                     </div>

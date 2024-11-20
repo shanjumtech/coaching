@@ -84,4 +84,23 @@ class FinancialStatementsController extends Controller
         ]);
         return back()->with('success', 'Expense added successfull');
     }
+
+
+    public function expenseCategoryList(){
+
+        $data['page_title'] = "expense";
+        $data['category'] = expense_catagory::all();
+        return view('admin.financial.expense.expense_cat_list', $data);
+    }
+
+    public function expenseCategoryEdit($id){
+
+        $data['page_title'] = "Expense Catagory Edit";
+        $data['category'] = expense_catagory::find($id);
+        return view('admin.financial.expense.expense_cat_edit', $data);
+    }
+
+
+
+
 }

@@ -120,6 +120,8 @@ Route::get('/admin/payment/order/list', [HomeController::class, 'adminPaymentOrd
  Route::get('/admin/withdraw/index', [FinancialStatementsController::class, 'withdrawIndex'])->name('withdraw-index');
  Route::post('/admin/withdraw/store', [FinancialStatementsController::class, 'withdrawStore'])->name('withdraw-store');
  //expense
+ Route::get('/admin/expen/cat/list', [FinancialStatementsController::class, 'expenseCategoryList'])->name('expense-category-list');
+ Route::get('/admin/expen/cat/edit/{id}', [FinancialStatementsController::class, 'expenseCategoryEdit'])->name('categoryExpen.edit');
  Route::get('/admin/expense/category', [FinancialStatementsController::class, 'expenseCategory'])->name('expense-category');
  Route::post('/admin/expense/cat/store', [FinancialStatementsController::class, 'expenseCategoryStore'])->name('expense-cat-store');
  Route::get('/admin/expense/index', [FinancialStatementsController::class, 'expenseIndex'])->name('expense-index');
