@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title> {{$page_title}} | {{$site_title}}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/logo.png') }}">
 
 
     <!-- Google Font: Source Sans Pro -->
@@ -87,8 +87,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            <strong>Copyright &copy; 2024 <a href="https://appllys.com/">Appllys</a>.</strong>All rights reserved.
             {{-- <div class="float-right d-none d-sm-inline-block">--}}
             {{-- <b>Version</b> 3.2.0--}}
             {{-- </div>--}}

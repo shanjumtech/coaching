@@ -2,7 +2,8 @@
     @php $user = auth()->user() @endphp
     <!-- Brand Logo -->
     <a href="{{route('dashboard')}}" class="brand-link">
-        <img src="{{asset('public')}}/logo.png" alt="{{$basic->title}}" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{asset('public/logo.png')}}" alt="{{$basic->title}}" class="brand-image img-circle elevation-3" style="opacity: .8">
+
         <span class="brand-text font-weight-light">{{$basic->title}}</span>
     </a>
 
@@ -46,10 +47,31 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item {{Request::is('admin/get-basic') || Request::is('admin/get-about') || Request::is('admin/get-terms') || Request::is('admin/get-privacy') ? 'menu-open' : ''}}">
+                    <a href="#" class="nav-link {{Request::is('admin/get-basic') || Request::is('admin/get-about') || Request::is('admin/get-terms') || Request::is('admin/get-privacy') ? 'active' : ''}}">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>Course Setting<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('get-about')}}" class="nav-link {{Request::is('admin/get-about') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Subject</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('get-privacy')}}" class="nav-link {{Request::is('admin/get-privacy') ? 'active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Batch</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{route('package.index')}}" class="nav-link {{Request::is('admin/package') || Request::is('admin/package/create') || Request::is('admin/package/*/edit') || Request::is('admin/package/*/show') ? 'active' : ''}}">
                         <i class="nav-icon fas fa-paperclip"></i>
-                        <p>Manage Course </p>
+                        <p>Manage Course</p>
                     </a>
                 </li>
                 <li class="nav-item">
