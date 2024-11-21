@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\parmentStaticController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FinancialStatementsController;
+use App\Http\Controllers\SubjectController;
+
 
 Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('config:clear');
@@ -97,34 +99,44 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 //payment for checkout page
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/user/payment/', [HomeController::class, 'userParyment'])->name('userPaymentIndex');
+    Route::get('/user/payment/', [HomeController::class, 'userParyment'])->name('userPaymentIndex');
 
-Route::get('/user/payment/bkash/{orderId}', [HomeController::class, 'userParymentBkash'])->name('bkash-payment-form');
-Route::post('/user/payment/bkash/sucess', [HomeController::class, 'userParymentBkashSucess'])->name('bkash-payment-success');
+    Route::get('/user/payment/bkash/{orderId}', [HomeController::class, 'userParymentBkash'])->name('bkash-payment-form');
+    Route::post('/user/payment/bkash/sucess', [HomeController::class, 'userParymentBkashSucess'])->name('bkash-payment-success');
 
-Route::get('/user/payment/nagad/{orderId}', [HomeController::class, 'userParymentNagad'])->name('nagad-payment-form');
-Route::post('/user/payment/nagad/sucess', [HomeController::class, 'userParymentNagadSucess'])->name('nagad-payment-success');
+    Route::get('/user/payment/nagad/{orderId}', [HomeController::class, 'userParymentNagad'])->name('nagad-payment-form');
+    Route::post('/user/payment/nagad/sucess', [HomeController::class, 'userParymentNagadSucess'])->name('nagad-payment-success');
 
-Route::get('/user/payment/bank/{orderId}', [HomeController::class, 'userParymentBank'])->name('bank-payment-form');
-Route::post('/user/payment/bank/sucess', [HomeController::class, 'userParymentBankSucess'])->name('bank-payment-success');
+    Route::get('/user/payment/bank/{orderId}', [HomeController::class, 'userParymentBank'])->name('bank-payment-form');
+    Route::post('/user/payment/bank/sucess', [HomeController::class, 'userParymentBankSucess'])->name('bank-payment-success');
 
 
-//admin order list
-Route::get('/admin/order/list', [HomeController::class, 'adminOrderList'])->name('admin-order-list');
-Route::get('/update-order-status/{orderId}', [HomeController::class, 'OrderStatusUpdate']);
-Route::get('/update-order-payment-status/{orderId}', [HomeController::class, 'OrderStatusPaymentUpdate']);
-Route::get('/admin/payment/order/list', [HomeController::class, 'adminPaymentOrderList'])->name('admin-payment-order-list');
+    //admin order list
+    Route::get('/admin/order/list', [HomeController::class, 'adminOrderList'])->name('admin-order-list');
+    Route::get('/update-order-status/{orderId}', [HomeController::class, 'OrderStatusUpdate']);
+    Route::get('/update-order-payment-status/{orderId}', [HomeController::class, 'OrderStatusPaymentUpdate']);
+    Route::get('/admin/payment/order/list', [HomeController::class, 'adminPaymentOrderList'])->name('admin-payment-order-list');
 
-//Financial Statements
+    //Financial Statements
 
- Route::get('/admin/withdraw/index', [FinancialStatementsController::class, 'withdrawIndex'])->name('withdraw-index');
- Route::post('/admin/withdraw/store', [FinancialStatementsController::class, 'withdrawStore'])->name('withdraw-store');
- //expense
- Route::get('/admin/expen/cat/list', [FinancialStatementsController::class, 'expenseCategoryList'])->name('expense-category-list');
- Route::get('/admin/expen/cat/edit/{id}', [FinancialStatementsController::class, 'expenseCategoryEdit'])->name('categoryExpen.edit');
- Route::get('/admin/expense/category', [FinancialStatementsController::class, 'expenseCategory'])->name('expense-category');
- Route::post('/admin/expense/cat/store', [FinancialStatementsController::class, 'expenseCategoryStore'])->name('expense-cat-store');
- Route::get('/admin/expense/index', [FinancialStatementsController::class, 'expenseIndex'])->name('expense-index');
- Route::post('/admin/expense/Store', [FinancialStatementsController::class, 'expenseStore'])->name('expense-store');
+    Route::get('/admin/withdraw/index', [FinancialStatementsController::class, 'withdrawIndex'])->name('withdraw-index');
+    Route::post('/admin/withdraw/store', [FinancialStatementsController::class, 'withdrawStore'])->name('withdraw-store');
+    //expense
+    Route::get('/admin/expen/cat/list', [FinancialStatementsController::class, 'expenseCategoryList'])->name('expense-category-list');
+    Route::get('/admin/expen/cat/edit/{id}', [FinancialStatementsController::class, 'expenseCategoryEdit'])->name('categoryExpen.edit');
+    Route::get('/admin/expense/category', [FinancialStatementsController::class, 'expenseCategory'])->name('expense-category');
+    Route::post('/admin/expense/cat/store', [FinancialStatementsController::class, 'expenseCategoryStore'])->name('expense-cat-store');
+    Route::get('/admin/expense/index', [FinancialStatementsController::class, 'expenseIndex'])->name('expense-index');
+    Route::post('/admin/expense/Store', [FinancialStatementsController::class, 'expenseStore'])->name('expense-store');
+    //manage course
+    Route::prefix('admin')->name('admin.')->group(function () {
 
+        Route::prefix('subject')->name('subject.')->group(function () {
+            Route::get('/index', [SubjectController::class, 'Index'])->name('index');
+            Route::get('/create', [SubjectController::class, 'create'])->name('create');
+            Route::post('/store', [SubjectController::class, 'store'])->name('store');
+            Route::get('/edit', [SubjectController::class, 'edit'])->name('edit');
+            Route::get('/destroy', [SubjectController::class, 'destroy'])->name('destroy');
+        });
+    });
 });
