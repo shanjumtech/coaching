@@ -136,7 +136,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/create', [SubjectController::class, 'create'])->name('create');
             Route::post('/store', [SubjectController::class, 'store'])->name('store');
             Route::get('/edit', [SubjectController::class, 'edit'])->name('edit');
-            Route::get('/destroy', [SubjectController::class, 'destroy'])->name('destroy');
+            Route::delete('/subject/{id}', [SubjectController::class, 'destroy'])->name('destroy');
         });
     });
 });

@@ -48,56 +48,30 @@ class SubjectController extends Controller
 
      return response()->json('subject added successfull');
     }
-    public function expenseCategoryStore(Request $request){
-
-        $validatedData = $request->validate([
-            'expense_cat' => 'required',
-        ]);
-        expense_catagory::insert([
-            'name' => $request->expense_cat,
-            'created_at' => Carbon::now(),
-        ]);
-
-        return back()->with('success', 'expense category successfull');
-    }
-
-    public function expenseIndex(){
-        $data['page_title'] = "expense";
-        $data['category'] = expense_catagory::all();
-       return view('admin.financial.expense.index', $data);
-    }
-
-    public function expenseStore(Request $request)
+    public function edit($id)
     {
-        $validatedData = $request->validate([
-            'expense_cat' => 'required',
-            'amount' => 'required',
-        ]);
-        transactions::insert([
-            'debit' => $request->amount,
-            'category_id' => $request->expense_cat,
-            'type' => "expense",
-            'created_at' => Carbon::now(),
-        ]);
-        return back()->with('success', 'Expense added successfull');
+        $data['page_title'] = "Subject Edit";
+        $data['package'] = $this->packageService->editPackage($id);
+        return view('admin.package.edit', $data);
     }
-
-
-    public function expenseCategoryList(){
-
-        $data['page_title'] = "expense";
-        $data['category'] = expense_catagory::all();
-        return view('admin.financial.expense.expense_cat_list', $data);
+    public function update(PackageRequest $request, $id)
+    {
+        $in = $request->all();
+        $in['user_id'] = auth()->id();
+        $this->packageService->updatePackage($id, $in); // store this package using services
+        session()->flash('success', 'Successfully Created');
+        return redirect()->route('package.index');
     }
-
-    public function expenseCategoryEdit($id){
-
-        $data['page_title'] = "Expense Catagory Edit";
-        $data['category'] = expense_catagory::find($id);
-        return view('admin.financial.expense.expense_cat_edit', $data);
+    public function destroy($id)
+    {
+        $subject = Subject::find($id);
+        if ($subject) {
+            $subject->delete();
+            return redirect()->back()
+                ->with('success', 'Delete successfully');
+        } else {
+            return redirect()->back()->with('success', 'Some thing worng');
+        }
     }
-
-
-
 
 }

@@ -46,7 +46,7 @@ class PackageController extends Controller
         $data['page_title'] = "Course Edit";
         $data['package'] = $this->packageService->editPackage($id);
         return view('admin.package.edit',$data);
-    }
+    }                                                    
     public function update(PackageRequest $request, $id)
     {
         $in = $request->all();
