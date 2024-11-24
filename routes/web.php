@@ -15,7 +15,7 @@ Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('config:cache');
     $exitCode = Artisan::call('view:clear');
     $exitCode = Artisan::call('route:clear');
-    return "All Clear";
+    return "All Clear adf";
 });;
 
 
