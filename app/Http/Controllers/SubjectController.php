@@ -4,21 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Services\OrderService;
 use App\Services\PackageService;
+use App\Services\SubjectService;
 use Illuminate\Http\Request;
 use App\Models\transactions;
 use App\Models\expense_catagory;
 use Carbon\Carbon;
 use App\Models\Subject;
+use App\Http\Requests\SubjectRequest;
+
+
 class SubjectController extends Controller
 {
     protected $packageService;
     protected $orderService;
+    protected $SubjectService;
 
-    public function __construct(PackageService $packageService, OrderService $orderService)
+    public function __construct(PackageService $packageService, OrderService $orderService,SubjectService $SubjectService)
     {
         $this->middleware(['auth', 'Setting']);
         $this->packageService = $packageService;
         $this->orderService = $orderService;
+        $this->SubjectService = $SubjectService;
     }
 
 
@@ -51,16 +57,16 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $data['page_title'] = "Subject Edit";
-        $data['package'] = $this->packageService->editPackage($id);
-        return view('admin.package.edit', $data);
+        $data['subject'] = $this->SubjectService->editSubject($id);
+        return view('admin.subject.edit', $data);
     }
-    public function update(PackageRequest $request, $id)
+    public function update(SubjectRequest $request)
     {
+        return response()->json('subject added successfull');
         $in = $request->all();
-        $in['user_id'] = auth()->id();
-        $this->packageService->updatePackage($id, $in); // store this package using services
+        $this->SubjectService->updateSubject($id, $in); // store this package using services
         session()->flash('success', 'Successfully Created');
-        return redirect()->route('package.index');
+        return response()->json('subject added successfull');
     }
     public function destroy($id)
     {

@@ -77,7 +77,7 @@
                     <p>Are you sure you want to Delete ?</p>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <form action="{{route('package.destroy',0)}}" method="post" id="deleteForm">
+                    <form action="{{route('admin.subject.destroy',0)}}" method="post" id="deleteForm">
                         {!! csrf_field() !!}
                         {!! method_field('DELETE') !!}
                         <input type="hidden" name="id" id="delete_id" class="delete_id" value="0">

@@ -135,8 +135,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/index', [SubjectController::class, 'Index'])->name('index');
             Route::get('/create', [SubjectController::class, 'create'])->name('create');
             Route::post('/store', [SubjectController::class, 'store'])->name('store');
-            Route::get('/edit', [SubjectController::class, 'edit'])->name('edit');
-            Route::delete('/subject/{id}', [SubjectController::class, 'destroy'])->name('destroy');
+            Route::get('/edit/{id}', [SubjectController::class, 'edit'])->name('edit');
+            Route::delete('/destroy/{id}', [SubjectController::class, 'destroy'])->name('destroy');
+            Route::post('/update', [SubjectController::class, 'destroy'])->name('update');     Route::delete('/update', [SubjectController::class, 'destroy'])->name('update');
         });
     });
 });
